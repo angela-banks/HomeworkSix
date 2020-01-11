@@ -8,23 +8,39 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <h1>Weather Dashboard</h1>
 
-    <div class="container">
-        <div class="current weather">
-            <div class="temperature">Temperature</div>
-            <div class="humid">Humidity</div>
-            <div class="wind">Wind Speed</div>
-            <div class="uv"> UV Index</div>
-        </div>
+    <div class="jumbotron" style="margin-bottom: 0px; color: palegoldenrod; background: paleturquoise;">
+    <h1 class="text-center" style="font-size: 55px; font-weight: 800;">Weather Dashboard</h1>
     </div>
 
-    <div class="search"col-sm-3>
+    <table style="width: 75%;">
+        <tbody>
+            <tr class="current weather">
+                    <th scope="col" rowspan="4">Current Weather:</th>
+                    <img id="icon" width="75px" src="imgs/code/200.png" alt="image">
+                    <span id="noblank"></span>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <div id="showWeather"></div>
+
+    <div class="search">
         <h1>Search For City:</h1>
-        <input type="text" class="searchbar" placeholder="Enter City" data-searched>
+        <input type="text" class="searchbar" placeholder="Enter City">
+        <button id="submit" class="btn btn-primary">Search</button>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <div class="current weather"> 
+            <div id="temp" class="temperature">Temperature</div>
+            <div id="humid" class="humid">Humidity</div>
+            <div id="wind" class="wind">Wind Speed</div>
+            <div id="uv" class="uv"> UV Index</div>
+           
+        </div> -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="./assets/script.js"></script>
 </body>
