@@ -1,33 +1,37 @@
 //Run when page loads
 
 $(document).ready(function () {
-    $("#submit").onload("click", function () {
+    $("#submit").on("click", function () {
         event.preventDefault();
 //Variable that will return value from searchbar
-        let searchbar = $(".searchbar").value();
-
+        let searchbar = $(".searchbar").val();
+        console.log(searchbar);
  //Return Search Results with API documentation
         if (searchbar != '') {
             
             let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchbar + "&units=imperial" + "&APPID=ca41c4eea8b5971b71a7ea04a63fd171";
-            
+           
             $.ajax({
                 url: queryURL,
                 method: "GET",
             }).then(function(response){
-                console.log(response);
+                console.log("*@#%&", response);
         
             //Populate Search Results
                 let row = $("<tr>");
                 let city = $("<th>").text(response.name);
                 let row1 = $("<tr>");
-                let temp = $("<td>").text(response.main);
+                let temp = $("<td>").text(response.main.temp);
+                console.log(response.main.temp);
                 let row2 = $("<tr>");
                 let humid = $("<td>").text(response.main.humidity);
+                console.log(response.main.humidity);
                 let row3 = $("<tr>");
                 let wind = $("<td>").text(response.wind.speed);
+                console.log(response.wind.speed);
                 //let row4 = $("<tr>");
                 //let uv = $("<td>").text(response.main.uv);
+        
 
         // Append the td elements to the new table row
                 row.append(city);
