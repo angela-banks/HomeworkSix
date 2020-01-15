@@ -1,3 +1,48 @@
-th, td {
-    padding: 2px;
-  }
+/* Margin Settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background Image for App */
+body {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: palegoldenrod;
+    background-image: url('./weather.png');
+    background-size: cover;
+    background-position: top center;
+}
+
+/* SearchBox */
+.search {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 280px;   
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+}
+
+/* Current Forecast with specifics*/
+.Forecast {
+    border: 1px solid #ffffff;
+    display: flex;
+    justify-content: flex-end;
+    padding: 25px 25px 50px;
+}
+
+.city .temp .weatherpic .wind .humid {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 20px;
+    align-items: center;
+}
+
+/* 5-Day Forecast */
+.Days {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 70px;
+}
