@@ -1,11 +1,43 @@
 //Run when page loads
 
+//Array for city
+let cities = []
+if(localStorage.getItem("Cities")) {
+    cities = JSON.parse(localStorage.getItem("Cities"))
+};
+
+function Listing() {
+    for (let i=0; i < cities.length; i++){
+        let li = $("<li>").text(cities[i]);
+        $("#scrolling").append(li);
+    }
+}
+//Clear Listing 
+function clear() {
+    $(".Days").text("");
+    $("#scrolling").text("");
+};
+
+$("#clearCity").on("click", function(){
+    $("#scrolling").empty("");
+    localStorage.clear();
+});
+
 const API_KEY = "ca41c4eea8b5971b71a7ea04a63fd171"
 $(document).ready(function () {
     $("#submit").on("click", function () {
+        clear();
         event.preventDefault();
         //Variable that will return value from searchbar
         let searchbar = $(".search").val();
+        searchbar = searchbar.charAt(0).toUpperCase() + searchbar.slice(1);
+
+        if (cities.indexOf(searchbar) == -1) {
+            console.log("test")
+            cities.push(searchbar)
+            let cityString = JSON.stringify(cities)
+            localStorage.setItem("Cities", cityString)
+        } 
         console.log(searchbar);
         //Return Search Results with API documentation
         if (searchbar != '') {
@@ -16,6 +48,7 @@ $(document).ready(function () {
                 url: queryURL,
                 method: "GET",
             }).then(function (response) {
+        //Local storage of cities
                 console.log(response);
                 // //Populate & Append Search Results
                 $("#city").text("City: " + response.name);
@@ -55,12 +88,15 @@ $(document).ready(function () {
                     for( let i=0; i < FiveForecast.length; i++){
                         let card = $("<div>").attr("class", "card col-lg-2 p-1 card text-black bg-primary")
                         let cardbody = $("<div>").attr("class", "card-body p-0 text-center")
-                        let date = $("<h5>").text(FiveForecast[i].dt_txt);
-                        date.attr("class", "card-title")
+                        let h6 = $("<h5>")
+                        let date = moment(FiveForecast[i].dt_txt).format("MM/DD/YYYY");
+                        console.log(date);
+                        //date.attr("class", "card-title")
                         let icon = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + FiveForecast[i].weather[0].icon + "@2x.png")
                         let temp = $("<div>").text("temp: " + (FiveForecast[i].main.temp))
                         let humidity = $("<div>").text("humidity: " + (FiveForecast[i].main.humidity))
-                        cardbody.append(date, icon, temp, humidity);
+                        h6.append(date);
+                        cardbody.append(h6, icon, temp, humidity);
                         card.append(cardbody)
                         $(".Days").append(card);
                     }
@@ -89,6 +125,7 @@ $(document).ready(function () {
                         $(".container").append(UV)
                         
                     })
+                  Listing();
                 })
 
             });
